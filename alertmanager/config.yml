@@ -16,7 +16,7 @@ receivers:
     smarthost: 'smtp.gmail.com:587'
     auth_username: 'hochiminhoffline1001@gmail.com'
     auth_identity: 'hochiminhoffline1001@gmail.com'
-    auth_password: 'lqru fojx mmhk dzf'
+    auth_password: 'kgrt agwr obog llhe'
     send_resolved: true
     require_tls: true
     headers:
