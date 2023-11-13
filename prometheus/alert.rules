@@ -30,15 +30,6 @@ groups:
 
 - name: containers
   rules:
-  - alert: jenkins_down
-    expr: absent(container_memory_usage_bytes{name="jenkins"})
-    for: 30s
-    labels:
-      severity: critical
-    annotations:
-      summary: "Jenkins down"
-      description: "Jenkins container is down for more than 30 seconds."
-
   - alert: jenkins_high_cpu
     expr: sum(rate(container_cpu_usage_seconds_total{name="jenkins"}[1m])) / count(node_cpu_seconds_total{mode="system"}) * 100 > 10
     for: 30s
