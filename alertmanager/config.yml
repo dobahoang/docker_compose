@@ -22,9 +22,3 @@ receivers:
     headers:
       From: 'Alertmanager <hochiminhoffline1001@gmail.com>'
       Subject: '{{ template "email.subject" . }}'
-
-
-routes:
-- receiver: 'email'
-  match:
-    severity: 'critical'
