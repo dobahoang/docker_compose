@@ -1,11 +1,14 @@
 global:
   resolve_timeout: 5m
 
+templates:
+  - 'custom_email.tmpl'
+
 route:
   group_by: ['alertname']
   group_wait: 10s
-  group_interval: 10s
-  repeat_interval: 60s
+  group_interval: 5m
+  repeat_interval: 1h
   receiver: 'email'
 
 receivers:
@@ -21,4 +24,4 @@ receivers:
     require_tls: true
     headers:
       From: 'Alertmanager <hochiminhoffline1001@gmail.com>'
-      Subject: '{{ template "email.subject" . }}'
+      Subject: '{{ template "custom.email.body" . }}'
