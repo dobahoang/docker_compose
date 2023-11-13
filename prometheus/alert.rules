@@ -1,15 +1,4 @@
 groups:
-- name: test
-  rules:
-  - alert: test_alert
-    expr: vector(1) > 0  # This always evaluates to true
-    for: 1s             # Short duration for quick testing
-    labels:
-      severity: critical
-    annotations:
-      summary: "Test alert triggered"
-      description: "This is a test alert for validation purposes."
-
 - name: host
   rules:
   - alert: high_cpu_load
