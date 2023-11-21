@@ -1,28 +1,134 @@
 global:
   resolve_timeout: 5m
+  smtp_from: 'hochiminhoffline1001@gmail.com'
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_auth_username: 'hochiminhoffline1001@gmail.com'
+  smtp_auth_identity: 'hochiminhoffline1001@gmail.com'
+  smtp_auth_password: 'kgrt agwr obog llhe'
+  smtp_send_resolved: true
+  smtp_require_tls: true
+  smtp_headers:
+    From: 'Alertmanager <hochiminhoffline1001@gmail.com>'
+    Subject: '{{ template "custom.email.body" . }}'
 
 templates:
   - 'custom_email.tmpl'
 
 route:
-  group_by: ['alertname']
   group_wait: 10s
   group_interval: 1m
   repeat_interval: 1h
-  receiver: 'email'
+  receiver: admin
+  group_by: [ "category" ]
+  routes:
+      # Route for OS Alerts
+      - match_re:
+          app_type: (linux|windows)
+        # Fallback Receiver for OS Alerts
+        receiver: tma_solutions_admin
+        routes:
+          - match:
+              app_type: linux
+            # Fallback receiver for Linux Alerts
+            receiver: tma_solutions_linux-admin
+            routes:
+              - match:
+                  severity: critical
+                receiver: tma_solutions_linux-manager
+                continue: true
+              - match:
+                  severity: warning
+                receiver: tma_solutions_linux-teamlead
+                continue: true
+              - match:
+                  category: cpu
+                receiver: tma_solutions_linux-cpu
+
+          - match:
+              app_type: windows
+            # Fallback receiver for Windows Alerts
+            receiver: tma_solutions_windows-admin
+            routes:
+              - match:
+                  severity: critical
+                receiver: tma_solutions_windows-manager
+              - match:
+                  severity: warning
+                receiver: tma_solutions_windows-teamlead
+
+      # Route for Application Alerts
+      - match_re:
+          app_type: java
+        # Fallback Receiver for App Alerts
+        receiver: kma_admin_app
+        routes:
+          - match:
+              app_type: java
+            # Fallback receiver for App Alerts
+            receiver: kma_java_admin
+            routes:
+              - match:
+                  severity: critical
+                receiver: kma_java_manager
+              - match:
+                  severity: warning
+                receiver: kma_java_teamlead
+
+
+
 
 receivers:
-- name: 'email'
-  email_configs:
-  - to: 'ecommercewebsiteofhoang@gmail.com'
-    from: 'hochiminhoffline1001@gmail.com'
-    smarthost: 'smtp.gmail.com:587'
-    auth_username: 'hochiminhoffline1001@gmail.com'
-    auth_identity: 'hochiminhoffline1001@gmail.com'
-    auth_password: 'kgrt agwr obog llhe'
-    send_resolved: true
-    require_tls: true
-    headers:
-      From: 'Alertmanager <hochiminhoffline1001@gmail.com>'
-      Subject: '{{ template "custom.email.body" . }}'
+  - name: admin
+    email_configs:
+      - to : "bahoangwork@gmail.com"
+
+  - name: tma_solutions_admin
+    email_configs:
+      - to : "bahoang090801@gmail.com"
+
+  - name: tma_solutions_linux-admin
+    email_configs:
+      - to : "dungsi600@gmail.com"
+
+  - name: tma_solutions_linux-manager
+    email_configs:
+      - to: "ecommercewebsiteofhoang@gmail.com"
+
+  - name: tma_solutions_linux-teamlead
+    email_configs:
+      - to : "bahoangwork@gmail.com"
+
+  - name: tma_solutions_linux-cpu
+    email_configs:
+      - to: "bahoang090801@gmail.com"
+
+  - name: tma_solutions_windows-admin
+    email_configs:
+      - to : "dungsi600@gmail.com"
+
+  - name: tma_solutions_windows-manager
+    email_configs:
+      - to : "ecommercewebsiteofhoang@gmail.com"
+
+  - name: tma_solutions_windows-teamlead
+    email_configs:
+      - to : "bahoangwork@gmail.com"
+
+  - name: kma_admin_app
+    email_configs:
+      - to : "bahoang090801@gmail.com"
+
+  - name: kma_java_admin
+    email_configs:
+      - to : "dungsi600@gmail.com"
+
+  - name: kma_java_manager
+    email_configs:
+      - to : "ecommercewebsiteofhoang@gmail.com"
+
+  - name: kma_java_teamlead
+    email_configs:
+      - to : "bahoangwork@gmail.com"
+
+
 

@@ -1,5 +1,8 @@
 {{ define "custom.email.body" }}
-Subject: {{ .CommonAnnotations.summary }}
-
-{{ .CommonAnnotations.description }}
+Alert: {{ .CommonAnnotations.summary }}
+Job: {{ .GroupLabels.job }}
+Instance: {{ .CommonLabels.instance }}
+Severity: {{ .CommonLabels.severity }}
+Please check!!!!
 {{ end }}
+

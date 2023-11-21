@@ -2,14 +2,17 @@ global:
   scrape_interval:     15s
   evaluation_interval: 15s
 
-  # Attach these labels to any time series or alerts when communicating with
-  # external systems (federation, remote storage, Alertmanager).
+
   external_labels:
       monitor: 'docker-host-alpha'
 
-# Load and evaluate rules in this file every 'evaluation_interval' seconds.
+# Load and evaluate rules in this files every 'evaluation_interval' seconds.
 rule_files:
   - "alert.rules"
+  - "first.rules"
+  - "app.rules"
+  - "linux.rules"
+  - "windows.rules"
 
 # A scrape configuration containing exactly one endpoint to scrape.
 scrape_configs:
@@ -21,7 +24,7 @@ scrape_configs:
   - job_name: 'nodeexporter_1'
     scrape_interval: 5s
     static_configs:
-      - targets: ['54.251.168.18:8080']
+      - targets: ['54.254.39.174:8080']
 
   - job_name: 'cadvisor'
     scrape_interval: 5s
@@ -39,6 +42,19 @@ scrape_configs:
     static_configs:
       - targets: ['pushgateway:9091']
 
+  - job_name: 'accounts'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'accounts:8080' ]
+  - job_name: 'loans'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'loans:8090' ]
+  - job_name: 'cards'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'cards:9000' ]
+
 
 alerting:
   alertmanagers:
@@ -47,12 +63,4 @@ alerting:
     - targets: 
       - 'alertmanager:9093'
 
-#  - job_name: 'nginx'
-#    scrape_interval: 10s
-#    static_configs:
-#      - targets: ['nginxexporter:9113']
 
-#  - job_name: 'aspnetcore'
-#    scrape_interval: 10s
-#    static_configs:
-#      - targets: ['eventlog-proxy:5000', 'eventlog:5000']
