@@ -5,11 +5,8 @@ global:
   smtp_auth_username: 'hochiminhoffline1001@gmail.com'
   smtp_auth_identity: 'hochiminhoffline1001@gmail.com'
   smtp_auth_password: 'kgrt agwr obog llhe'
-  smtp_send_resolved: true
   smtp_require_tls: true
-  smtp_headers:
-    From: 'Alertmanager <hochiminhoffline1001@gmail.com>'
-    Subject: '{{ template "custom.email.body" . }}'
+
 
 templates:
   - 'custom_email.tmpl'
