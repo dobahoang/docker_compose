@@ -76,7 +76,12 @@ scrape_configs:
       - files:
         - 'targets_all.json'  # Update this path
     relabel_configs:
-      - source_labels: [__address__]
+      - source_labels: [ __address__, metrics_path ]
+        separator: ;
+        regex: (.+);(.+)
+        target_label: __metrics_path__
+        replacement: ${2}
+      - source_labels: [ __address__ ]
         regex: '(.+):.*'
         target_label: instance
         replacement: '${1}'
