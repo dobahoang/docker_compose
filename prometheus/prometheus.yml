@@ -24,17 +24,17 @@ scrape_configs:
   - job_name: 'nodeexporter_1'
     scrape_interval: 5s
     static_configs:
-      - targets: ['54.151.255.103:8080']
+      - targets: ['54.151.191.165:8080']
 
   - job_name: 'nodeexporter_2'
     scrape_interval: 5s
     static_configs:
-      - targets: ['54.151.255.103:8081']
+      - targets: ['54.151.191.165:8081']
 
   - job_name: 'nodeexporter_3'
     scrape_interval: 5s
     static_configs:
-      - targets: ['54.151.255.103:8082']
+      - targets: ['54.151.191.165:8082']
 
   - job_name: 'win-exporter'
     scrape_interval: 5s
