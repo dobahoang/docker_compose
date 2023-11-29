@@ -58,18 +58,28 @@ scrape_configs:
     static_configs:
       - targets: ['pushgateway:9091']
 
-  - job_name: 'accounts'
-    metrics_path: '/actuator/prometheus'
-    static_configs:
-      - targets: [ 'accounts:8080' ]
-  - job_name: 'loans'
-    metrics_path: '/actuator/prometheus'
-    static_configs:
-      - targets: [ 'loans:8090' ]
-  - job_name: 'cards'
-    metrics_path: '/actuator/prometheus'
-    static_configs:
-      - targets: [ 'cards:9000' ]
+  # - job_name: 'accounts'
+  #   metrics_path: '/actuator/prometheus'
+  #   static_configs:
+  #     - targets: [ 'accounts:8080' ]
+  # - job_name: 'loans'
+  #   metrics_path: '/actuator/prometheus'
+  #   static_configs:
+  #     - targets: [ 'loans:8090' ]
+  # - job_name: 'cards'
+  #   metrics_path: '/actuator/prometheus'
+  #   static_configs:
+  #     - targets: [ 'cards:9000' ]
+
+  - job_name: 'microservices-app'
+    file_sd_configs:
+      - files:
+        - '../service_discovery/targets_all.json'  # Update this path
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '(.+):.*'
+        target_label: instance
+        replacement: '${1}'
 
   - job_name: 'blackbox'
     scrape_interval: 10s
