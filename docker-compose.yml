@@ -275,3 +275,17 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
       # SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
       MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin:9411/api/v2/spans
+
+
+  blackbox_exporter:
+    image: prom/blackbox-exporter
+    restart: always
+    tty: true
+    ports:
+      - 9115:9115
+    dns: 8.8.8.8
+    command: --config.file=/etc/blackbox/blackbox.yml
+    volumes:
+      - ./blackbox/:/etc/blackbox/
+    networks:
+      - monitor-net
