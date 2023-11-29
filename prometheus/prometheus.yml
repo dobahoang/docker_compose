@@ -74,7 +74,7 @@ scrape_configs:
   - job_name: 'microservices-app'
     file_sd_configs:
       - files:
-        - '../service_discovery/targets_all.json'  # Update this path
+        - 'targets_all.json'  # Update this path
     relabel_configs:
       - source_labels: [__address__]
         regex: '(.+):.*'
