@@ -8,22 +8,6 @@
       }
     },
     {
-      "targets": ["54.254.45.53:8071"],
-      "labels": {
-        "job": "microservices-app",
-        "instance": "configserver",
-        "metrics_path": "/actuator/prometheus"
-      }
-    },
-    {
-      "targets": ["54.254.45.53:8070"],
-      "labels": {
-        "job": "microservices-app",
-        "instance": "eurekaserver",
-        "metrics_path": "/actuator/prometheus"
-      }
-    },
-    {
       "targets": ["54.254.45.53:8080"],
       "labels": {
         "job": "microservices-app",
