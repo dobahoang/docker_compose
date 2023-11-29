@@ -7,6 +7,8 @@ networks:
 volumes:
     prometheus_data: {}
     grafana_data: {}
+    pushgateway_data: {}
+    alertmanager_data: {}
 
 services:
 
@@ -106,6 +108,11 @@ services:
     image: prom/pushgateway
     container_name: pushgateway
     restart: unless-stopped
+    volumes:
+      - pushgateway_data:/data
+    command:
+      - --persistence.file=/data/pushgateway.data
+      - --persistence.interval=5m
     expose:
       - 9091
     networks:
@@ -289,3 +296,5 @@ services:
       - ./blackbox/:/etc/blackbox/
     networks:
       - monitor-net
+
+
