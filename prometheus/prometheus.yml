@@ -71,6 +71,23 @@ scrape_configs:
     static_configs:
       - targets: [ 'cards:9000' ]
 
+  - job_name: 'blackbox'
+    scrape_interval: 10s
+    metrics_path: /probe
+    static_configs:
+      - targets:
+          - https://google.com
+          - https://viblo.asia
+          - https://viblo.asia/api/web-init-404
+    params:
+      module: [ http_2xx ]
+    relabel_configs:
+      - source_labels: [ __address__ ]
+        target_label: __param_target
+      - source_labels: [ __param_target ]
+        target_label: instance
+      - target_label: __address__
+        replacement: "blackbox_exporter:9115"
 
 alerting:
   alertmanagers:
