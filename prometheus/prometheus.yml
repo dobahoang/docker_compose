@@ -94,6 +94,8 @@ scrape_configs:
           - https://google.com
           - https://viblo.asia
           - https://viblo.asia/api/web-init-404
+          - http://dobahoang
+          - https://actvn.edu.vn/
     params:
       module: [ http_2xx ]
     relabel_configs:
