@@ -1,7 +1,7 @@
 [
 
     {
-      "targets": ["54.254.45.53:8080"],
+      "targets": ["13.212.245.118:8080"],
       "labels": {
         "job": "microservices-app",
         "instance": "accounts",
@@ -9,7 +9,7 @@
       }
     },
     {
-      "targets": ["54.254.45.53:8090"],
+      "targets": ["13.212.245.118:8090"],
       "labels": {
         "job": "microservices-app",
         "instance": "loans",
@@ -17,7 +17,7 @@
       }
     },
     {
-      "targets": ["54.254.45.53:9000"],
+      "targets": ["13.212.245.118:9000"],
       "labels": {
         "job": "microservices-app",
         "instance": "cards",
