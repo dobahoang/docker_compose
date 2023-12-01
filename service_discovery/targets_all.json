@@ -1,52 +1,29 @@
 [
-    {
-      "targets": ["54.254.45.53:9411"],
-      "labels": {
-        "job": "microservices-app",
-        "instance": "zipkin"
-      }
-    },
-    {
-      "targets": ["54.254.45.53:8071"],
-      "labels": {
-        "job": "microservices-app",
-        "instance": "configserver"
-      }
-    },
-    {
-      "targets": ["54.254.45.53:8070"],
-      "labels": {
-        "job": "microservices-app",
-        "instance": "eurekaserver"
-      }
-    },
+
     {
       "targets": ["54.254.45.53:8080"],
       "labels": {
         "job": "microservices-app",
-        "instance": "accounts"
+        "instance": "accounts",
+        "metrics_path": "/actuator/prometheus"
       }
     },
     {
       "targets": ["54.254.45.53:8090"],
       "labels": {
         "job": "microservices-app",
-        "instance": "loans"
+        "instance": "loans",
+        "metrics_path": "/actuator/prometheus"
       }
     },
     {
       "targets": ["54.254.45.53:9000"],
       "labels": {
         "job": "microservices-app",
-        "instance": "cards"
-      }
-    },
-    {
-      "targets": ["54.254.45.53:8072"],
-      "labels": {
-        "job": "microservices-app",
-        "instance": "gatewayserver"
+        "instance": "cards",
+        "metrics_path": "/actuator/prometheus"
       }
     }
+
   ]
   
