@@ -1,6 +1,6 @@
 [
     {
-      "targets": ["13.250.191.64:9411"],
+      "targets": ["18.143.148.174:9411"],
       "labels": {
         "job": "microservices-app",
         "instance": "zipkin",
@@ -8,7 +8,7 @@
       }
     },
     {
-      "targets": ["13.250.191.64:8080"],
+      "targets": ["18.143.148.174:8080"],
       "labels": {
         "job": "microservices-app",
         "instance": "accounts",
@@ -16,7 +16,7 @@
       }
     },
     {
-      "targets": ["13.250.191.64:8090"],
+      "targets": ["18.143.148.174:8090"],
       "labels": {
         "job": "microservices-app",
         "instance": "loans",
@@ -24,7 +24,7 @@
       }
     },
     {
-      "targets": ["13.250.191.64:9000"],
+      "targets": ["18.143.148.174:9000"],
       "labels": {
         "job": "microservices-app",
         "instance": "cards",
@@ -32,7 +32,7 @@
       }
     },
     {
-      "targets": ["13.250.191.64:8072"],
+      "targets": ["18.143.148.174:8072"],
       "labels": {
         "job": "microservices-app",
         "instance": "gatewayserver",

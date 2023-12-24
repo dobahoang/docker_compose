@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "my_metric 42" | curl -u admin:kmaAt16i@  --data-binary @- http://13.250.191.64:9091/metrics/job/pushgateway
+echo "my_metric 42" | curl -u admin:kmaAt16i@  --data-binary @- http://18.143.148.174:9091/metrics/job/pushgateway
